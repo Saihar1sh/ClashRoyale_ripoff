@@ -23,38 +23,65 @@ public static class VectorExtensionMethods
     {
 		return new Vector3(v.x, 0, v.y);
     }
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="v"></param>
+	/// <returns>Clone of vector provided</returns>
 	public static Vector2 Clone(this Vector3 v)
 	{
 		return new Vector2(v.x, v.y);
 	}
+    /// <summary>
+    /// adds x float value to vector
+    /// </summary>
+    /// <returns> Changed vector with x value increamented</returns>
 
-	public static Vector3 WithX(this Vector3 v, float x)
+    public static Vector3 WithX(this Vector3 v, float x)
 	{
 		return new Vector3(x, v.y, v.z);
 	}
-
+	/// <summary>
+	/// adds y float value to vector
+	/// </summary>
+	/// <returns> Changed vector with y value increamented</returns>
 	public static Vector3 WithY(this Vector3 v, float y)
 	{
 		return new Vector3(v.x, y, v.z);
 	}
+    /// <summary>
+    /// adds z float value to vector
+    /// </summary>
+    /// <returns> Changed vector with z value increamented</returns>
 
-	public static Vector3 WithZ(this Vector3 v, float z)
+    public static Vector3 WithZ(this Vector3 v, float z)
 	{
 		return new Vector3(v.x, v.y, z);
 	}
+    /// <summary>
+    /// adds x float value to vector
+    /// </summary>
+    /// <returns> Changed vector with x value increamented</returns>
 
-	public static Vector2 WithX(this Vector2 v, float x)
+    public static Vector2 WithX(this Vector2 v, float x)
 	{
 		return new Vector2(x, v.y);
 	}
+    /// <summary>
+    /// adds y float value to vector
+    /// </summary>
+    /// <returns> Changed vector with y value increamented</returns>
 
-	public static Vector2 WithY(this Vector2 v, float y)
+    public static Vector2 WithY(this Vector2 v, float y)
 	{
 		return new Vector2(v.x, y);
 	}
+    /// <summary>
+    /// adds z float value to vector
+    /// </summary>
+    /// <returns> Changed vector with z value increamented</returns>
 
-	public static Vector3 WithZ(this Vector2 v, float z)
+    public static Vector3 WithZ(this Vector2 v, float z)
 	{
 		return new Vector3(v.x, v.y, z);
 	}

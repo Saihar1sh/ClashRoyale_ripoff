@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Ray cameraRay;
-    Transform target;
+    Item target_card;
     public LayerMask layerMask;
 
     Vector3 targetPos, mouseOffsetPos;
@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            //Debug.Log("mouse click ");
             cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(cameraRay, 100f);
             if (hits.Length>0)
@@ -35,39 +34,57 @@ public class PlayerController : MonoBehaviour
                     {
                         case 0:
                             targetPos = hit.point;
+
+                            if(target_card)
+                                target_card.isUsed = false;
                             break;
-                        case 6:
+                        case 6: // ground
+                            targetPos = hit.collider.transform.position;
+
+                            if(target_card)
+                                target_card.isUsed = true;
                             break;
-                        case 7:
-                            if (target == null)
+
+                        case 7: //card  
+                            if (target_card == null)
+                            {
                                 mouseOffsetPos = hit.collider.transform.position - GetMouseWorldPos();
-                            target = hit.collider.transform.parent;
+                                target_card = hit.collider.gameObject.GetComponent<Item>();
+                                target_card.SelectCard();
+                            }
                             break;
                         default:
+                            if (target_card)
+                                target_card.isUsed = false;
+
                             break;
                     }
                 }
-/*                Debug.Log("hit on "+hitInfo.collider.gameObject.name+" layer: "+ hitInfo.collider.gameObject.layer);
-                if(hitInfo.collider.gameObject.layer == 7)
-                {
-
-
-                    //Vector3 mousePos = Camera.main.ScreenToWorldPoint()
-                }
-                if (hitInfo.collider.gameObject.layer != 6)
-                    return;
-*/            }
-            if(target)
+            }
+            if(target_card)
             {
-                //Vector3 targetPos = (Camera.main.ScreenToWorldPoint( Input.mousePosition));
-
-                target.position = targetPos.WithY(target.position.y);
+                target_card.transform.position = targetPos.WithY(target_card.transform.position.y);
             }
 
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            target = null;
+            if (target_card)
+            {
+                if (!target_card.isUsed)
+                {
+                    //get card back to card's initial place
+                    target_card.SetInitialPositionAndRotation();
+                }
+                else
+                {
+                    //deployed on ground
+
+                }
+
+                target_card.DeselectCard();
+            }
+            target_card = null;
         }
     }
     private Vector3 GetMouseWorldPos()

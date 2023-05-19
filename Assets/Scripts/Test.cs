@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-    public Transform[] spriteTranforms;
+    public Item[] itemCards;
     //public RectTransform[] sprite_rects;
 
     public Image[] toCopy;
@@ -15,11 +15,13 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(0.1f);
-        for (int i = 0; i < spriteTranforms.Length; i++)
+        yield return null;// WaitForSeconds(0.1f);
+        for (int i = 0; i < itemCards.Length; i++)
         {
-            spriteTranforms[i].transform.position = toCopy[i].transform.position;
-            spriteTranforms[i].transform.rotation = Quaternion.Euler( canvas.transform.rotation.eulerAngles);
+            itemCards[i].SetInitialPositionAndRotation(toCopy[i].transform.position, Quaternion.Euler(canvas.transform.rotation.eulerAngles));
+        //yield return new WaitForSeconds(0.1f);
+            itemCards[i].displaySR.size =  toCopy[i].rectTransform.sizeDelta;
+            //itemCards[i].transform.rotation = Quaternion.Euler( canvas.transform.rotation.eulerAngles);
             //sprite_rects[i] = toCopy[i].rectTransform;
             //Debug.Log(toCopy[i].rectTransform.sizeDelta + " " + sprite_rects[i].sizeDelta);
             //transforms[i].localScale = toCopy[i].localScale;
